@@ -175,7 +175,7 @@ function Home() {
               return (
                 <Reveal key={p.n} delay={i * 60}>
                   <div className="relative grid grid-cols-[56px_1fr] items-center gap-6 py-8 md:grid-cols-[1fr_56px_1fr] md:gap-9">
-                    <div className={`card p-7 md:col-start-${flip ? "3" : "1"}`}>
+                    <div className={`card p-7 ${flip ? "md:col-start-3" : "md:col-start-1"}`}>
                       <h4 className="text-[1.12rem] font-bold">{p.title}</h4>
                       <p className="mt-2 text-[0.94rem] text-ink-soft">{p.desc}</p>
                       <div className="mt-3 flex flex-wrap gap-2">
