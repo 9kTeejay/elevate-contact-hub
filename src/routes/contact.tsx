@@ -148,8 +148,8 @@ function Contact() {
                   </div>
                   <Field name="message"  label="What's the goal for the next 90 days?" textarea required />
                   {err && <p className="text-[0.85rem] text-red-600">{err}</p>}
-                  <button type="submit" className="btn btn-primary mt-2 w-full">
-                    Book My Free Strategy Call
+                  <button type="submit" disabled={status === "submitting"} className="btn btn-primary mt-2 w-full disabled:opacity-60 disabled:cursor-not-allowed">
+                    {status === "submitting" ? "Sending…" : "Book My Free Strategy Call"}
                   </button>
                   <p className="text-center text-[0.78rem] text-ink-faint">
                     No contracts. No spam. We reply personally within one business day.
