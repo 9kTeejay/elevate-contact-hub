@@ -9,10 +9,10 @@ import { faqs, CONTACT } from "@/lib/site-content";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Book a Free Strategy Call — Northbound" },
-      { name: "description", content: "Tell us about your business. In one 30-minute call, we'll show you where you're losing customers and what a connected growth system would look like." },
-      { property: "og:title", content: "Book a Free Strategy Call — Northbound" },
-      { property: "og:description", content: "Tell us about your business. In one call, we'll show you where growth is leaking and what to build." },
+      { title: "Contact Us — Mutual of Omaha Policy Help Line" },
+      { name: "description", content: "Get help with your Mutual of Omaha life insurance policy. Call (832) 622-4254 or send us a message — a licensed professional will get back to you within one business day." },
+      { property: "og:title", content: "Contact — Mutual of Omaha Policy Help Line" },
+      { property: "og:description", content: "Reach a licensed professional about your Mutual of Omaha life insurance policy. Free, no obligation." },
       { property: "og:url", content: "/contact" },
     ],
     links: [{ rel: "canonical", href: "/contact" }],
@@ -82,13 +82,13 @@ function Contact() {
       <section className="py-24">
         <div className="wrap grid gap-14 md:grid-cols-[0.9fr_1.1fr] md:items-start">
           <Reveal>
-            <span className="eyebrow-label">Get Started</span>
+            <span className="eyebrow-label">Talk To A Human</span>
             <h1 className="display-title mt-4" style={{ fontSize: "clamp(2rem, 4.2vw, 3.2rem)" }}>
-              Book a free <span className="grad-text">strategy call</span>.
+              Get help with your <span className="grad-text">Mutual of Omaha policy</span>.
             </h1>
             <p className="mt-5 text-[1.05rem] text-ink-soft">
-              Thirty minutes. No pitch. We'll audit where you're losing customers today and map out
-              what a connected growth system would look like for your business.
+              The fastest way to get an answer is to call — a licensed professional will pick up.
+              Prefer to write? Fill out the form and we'll respond within one business day.
             </p>
 
             <div className="mt-8 flex flex-col gap-4">
@@ -143,16 +143,16 @@ function Contact() {
                     <Field name="phone"   label="Phone"           type="tel" autoComplete="tel" />
                   </div>
                   <div className="grid gap-4 sm:grid-cols-2">
-                    <Field name="company" label="Business name"   autoComplete="organization" />
-                    <Field name="industry" label="Industry" placeholder="Roofing, HVAC, Dental…" />
+                    <Field name="company" label="Policy number (if known)" />
+                    <Field name="industry" label="Topic" placeholder="Claim, beneficiary, lapsed…" />
                   </div>
-                  <Field name="message"  label="What's the goal for the next 90 days?" textarea required />
+                  <Field name="message"  label="How can we help with your Mutual of Omaha policy?" textarea required />
                   {err && <p className="text-[0.85rem] text-red-600">{err}</p>}
                   <button type="submit" disabled={status === "submitting"} className="btn btn-primary mt-2 w-full disabled:opacity-60 disabled:cursor-not-allowed">
-                    {status === "submitting" ? "Sending…" : "Book My Free Strategy Call"}
+                    {status === "submitting" ? "Sending…" : "Send My Message"}
                   </button>
                   <p className="text-center text-[0.78rem] text-ink-faint">
-                    No contracts. No spam. We reply personally within one business day.
+                    Free · Confidential · We reply within one business day.
                   </p>
                 </div>
               )}
@@ -165,7 +165,7 @@ function Contact() {
         <div className="wrap-narrow">
           <Reveal>
             <span className="eyebrow-label">FAQ</span>
-            <h2 className="section-title mt-3.5">Before you book — quick answers.</h2>
+            <h2 className="section-title mt-3.5">Before you call — quick answers.</h2>
           </Reveal>
           <div className="mt-10">
             <FAQ items={faqs} />
