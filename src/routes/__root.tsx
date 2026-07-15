@@ -96,7 +96,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           name: "Northbound",
           description: SITE_DESC,
           telephone: "+1-832-622-4254",
-          email: "Nxtchritsmas@Nr-financial.com",
+          email: "nxtchristmas@nr-financial.com",
           sameAs: [],
         }),
       },
