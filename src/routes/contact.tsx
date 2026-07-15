@@ -29,14 +29,17 @@ const contactSchema = z.object({
   message: z.string().trim().min(1, "Tell us a little about your goals").max(2000),
 });
 
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mjgnklak";
+
 function Contact() {
-  const [status, setStatus] = useState<"idle" | "ok" | "err">("idle");
+  const [status, setStatus] = useState<"idle" | "submitting" | "ok" | "err">("idle");
   const [err, setErr] = useState<string | null>(null);
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setErr(null);
-    const fd = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const fd = new FormData(form);
     const data = {
       name: String(fd.get("name") ?? ""),
       email: String(fd.get("email") ?? ""),
@@ -51,21 +54,27 @@ function Contact() {
       setStatus("err");
       return;
     }
-    // No backend wired yet — open a prefilled email so the lead reaches us immediately.
-    const subject = encodeURIComponent(`New strategy call request — ${parsed.data.name}`);
-    const body = encodeURIComponent(
-      [
-        `Name: ${parsed.data.name}`,
-        `Email: ${parsed.data.email}`,
-        `Phone: ${parsed.data.phone || "—"}`,
-        `Company: ${parsed.data.company || "—"}`,
-        `Industry: ${parsed.data.industry || "—"}`,
-        "",
-        parsed.data.message,
-      ].join("\n"),
-    );
-    window.location.href = `mailto:${CONTACT.email}?subject=${subject}&body=${body}`;
-    setStatus("ok");
+
+    setStatus("submitting");
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: fd,
+      });
+      if (!res.ok) {
+        const body = await res.json().catch(() => null);
+        const msg = body?.errors?.[0]?.message ?? "Something went wrong. Please try again.";
+        setErr(msg);
+        setStatus("err");
+        return;
+      }
+      form.reset();
+      setStatus("ok");
+    } catch {
+      setErr("Network error. Please try again or email us directly.");
+      setStatus("err");
+    }
   }
 
   return (
