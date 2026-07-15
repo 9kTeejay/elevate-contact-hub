@@ -9,10 +9,10 @@ import { faqs, CONTACT } from "@/lib/site-content";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Book a Free Strategy Call — Northbound" },
-      { name: "description", content: "Tell us about your business. In one 30-minute call, we'll show you where you're losing customers and what a connected growth system would look like." },
-      { property: "og:title", content: "Book a Free Strategy Call — Northbound" },
-      { property: "og:description", content: "Tell us about your business. In one call, we'll show you where growth is leaking and what to build." },
+      { title: "Contact Us — Mutual of Omaha Policy Help Line" },
+      { name: "description", content: "Get help with your Mutual of Omaha life insurance policy. Call (832) 622-4254 or send us a message — a licensed professional will get back to you within one business day." },
+      { property: "og:title", content: "Contact — Mutual of Omaha Policy Help Line" },
+      { property: "og:description", content: "Reach a licensed professional about your Mutual of Omaha life insurance policy. Free, no obligation." },
       { property: "og:url", content: "/contact" },
     ],
     links: [{ rel: "canonical", href: "/contact" }],
@@ -82,13 +82,13 @@ function Contact() {
       <section className="py-24">
         <div className="wrap grid gap-14 md:grid-cols-[0.9fr_1.1fr] md:items-start">
           <Reveal>
-            <span className="eyebrow-label">Get Started</span>
+            <span className="eyebrow-label">Talk To A Human</span>
             <h1 className="display-title mt-4" style={{ fontSize: "clamp(2rem, 4.2vw, 3.2rem)" }}>
-              Book a free <span className="grad-text">strategy call</span>.
+              Get help with your <span className="grad-text">Mutual of Omaha policy</span>.
             </h1>
             <p className="mt-5 text-[1.05rem] text-ink-soft">
-              Thirty minutes. No pitch. We'll audit where you're losing customers today and map out
-              what a connected growth system would look like for your business.
+              The fastest way to get an answer is to call — a licensed professional will pick up.
+              Prefer to write? Fill out the form and we'll respond within one business day.
             </p>
 
             <div className="mt-8 flex flex-col gap-4">
