@@ -143,16 +143,16 @@ function Contact() {
                     <Field name="phone"   label="Phone"           type="tel" autoComplete="tel" />
                   </div>
                   <div className="grid gap-4 sm:grid-cols-2">
-                    <Field name="company" label="Business name"   autoComplete="organization" />
-                    <Field name="industry" label="Industry" placeholder="Roofing, HVAC, Dental…" />
+                    <Field name="company" label="Policy number (if known)" />
+                    <Field name="industry" label="Topic" placeholder="Claim, beneficiary, lapsed…" />
                   </div>
-                  <Field name="message"  label="What's the goal for the next 90 days?" textarea required />
+                  <Field name="message"  label="How can we help with your Mutual of Omaha policy?" textarea required />
                   {err && <p className="text-[0.85rem] text-red-600">{err}</p>}
                   <button type="submit" disabled={status === "submitting"} className="btn btn-primary mt-2 w-full disabled:opacity-60 disabled:cursor-not-allowed">
-                    {status === "submitting" ? "Sending…" : "Book My Free Strategy Call"}
+                    {status === "submitting" ? "Sending…" : "Send My Message"}
                   </button>
                   <p className="text-center text-[0.78rem] text-ink-faint">
-                    No contracts. No spam. We reply personally within one business day.
+                    Free · Confidential · We reply within one business day.
                   </p>
                 </div>
               )}
@@ -165,7 +165,7 @@ function Contact() {
         <div className="wrap-narrow">
           <Reveal>
             <span className="eyebrow-label">FAQ</span>
-            <h2 className="section-title mt-3.5">Before you book — quick answers.</h2>
+            <h2 className="section-title mt-3.5">Before you call — quick answers.</h2>
           </Reveal>
           <div className="mt-10">
             <FAQ items={faqs} />
