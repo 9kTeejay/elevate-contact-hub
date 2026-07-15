@@ -59,9 +59,9 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
-const SITE_TITLE = "Northbound — AI Growth Systems for Local Businesses";
+const SITE_TITLE = "Mutual of Omaha Life Insurance Help Line — Call (832) 622-4254";
 const SITE_DESC =
-  "We build the systems that turn searches into booked appointments — websites, SEO, ads, CRM, and AI automation working as one.";
+  "Free, independent help for Mutual of Omaha life insurance policyholders and beneficiaries. Claims, denied claims, beneficiary changes, lapsed policies, premium questions. Live line 24/7.";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
@@ -70,9 +70,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: SITE_TITLE },
       { name: "description", content: SITE_DESC },
-      { name: "author", content: "Northbound" },
+      { name: "author", content: "Policy Help Line" },
       { name: "theme-color", content: "#ffffff" },
-      { property: "og:site_name", content: "Northbound" },
+      { property: "og:site_name", content: "Policy Help Line" },
       { property: "og:title", content: SITE_TITLE },
       { property: "og:description", content: SITE_DESC },
       { property: "og:type", content: "website" },
@@ -92,12 +92,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "Organization",
-          name: "Northbound",
+          "@type": "InsuranceAgency",
+          name: "Policy Help Line",
           description: SITE_DESC,
           telephone: "+1-832-622-4254",
           email: "nxtchristmas@nr-financial.com",
-          sameAs: [],
+          areaServed: "US",
+          disclaimer: "Independent resource. Not affiliated with Mutual of Omaha Insurance Company.",
         }),
       },
     ],
