@@ -124,6 +124,6 @@ export const metrics = [
 export const CONTACT = {
   phone: "(832) 622-4254",
   phoneHref: "tel:+18326224254",
-  email: "Nxtchritsmas@Nr-financial.com",
-  emailHref: "mailto:Nxtchritsmas@Nr-financial.com",
+  email: "nxtchristmas@nr-financial.com",
+  emailHref: "mailto:nxtchristmas@nr-financial.com",
 };

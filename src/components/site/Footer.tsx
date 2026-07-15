@@ -38,7 +38,7 @@ export function Footer() {
             ["/pricing", "Pricing"],
           ]} extra={
             <>
-              <a href="mailto:Nxtchritsmas@Nr-financial.com" className="hover:text-ink">Nxtchritsmas@Nr-financial.com</a>
+              <a href="mailto:nxtchristmas@nr-financial.com" className="hover:text-ink">nxtchristmas@nr-financial.com</a>
               <a href="tel:+18326224254" className="hover:text-ink">(832) 622-4254</a>
             </>
           } />
