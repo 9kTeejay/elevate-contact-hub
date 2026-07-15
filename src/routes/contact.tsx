@@ -29,14 +29,17 @@ const contactSchema = z.object({
   message: z.string().trim().min(1, "Tell us a little about your goals").max(2000),
 });
 
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mjgnklak";
+
 function Contact() {
-  const [status, setStatus] = useState<"idle" | "ok" | "err">("idle");
+  const [status, setStatus] = useState<"idle" | "submitting" | "ok" | "err">("idle");
   const [err, setErr] = useState<string | null>(null);
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setErr(null);
-    const fd = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const fd = new FormData(form);
     const data = {
       name: String(fd.get("name") ?? ""),
       email: String(fd.get("email") ?? ""),
@@ -51,21 +54,27 @@ function Contact() {
       setStatus("err");
       return;
     }
-    // No backend wired yet — open a prefilled email so the lead reaches us immediately.
-    const subject = encodeURIComponent(`New strategy call request — ${parsed.data.name}`);
-    const body = encodeURIComponent(
-      [
-        `Name: ${parsed.data.name}`,
-        `Email: ${parsed.data.email}`,
-        `Phone: ${parsed.data.phone || "—"}`,
-        `Company: ${parsed.data.company || "—"}`,
-        `Industry: ${parsed.data.industry || "—"}`,
-        "",
-        parsed.data.message,
-      ].join("\n"),
-    );
-    window.location.href = `mailto:${CONTACT.email}?subject=${subject}&body=${body}`;
-    setStatus("ok");
+
+    setStatus("submitting");
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: fd,
+      });
+      if (!res.ok) {
+        const body = await res.json().catch(() => null);
+        const msg = body?.errors?.[0]?.message ?? "Something went wrong. Please try again.";
+        setErr(msg);
+        setStatus("err");
+        return;
+      }
+      form.reset();
+      setStatus("ok");
+    } catch {
+      setErr("Network error. Please try again or email us directly.");
+      setStatus("err");
+    }
   }
 
   return (
@@ -121,10 +130,9 @@ function Contact() {
               {status === "ok" ? (
                 <div className="flex flex-col items-center gap-4 py-10 text-center">
                   <CheckCircle2 className="h-10 w-10 text-accent-1" />
-                  <h3 className="text-[1.2rem] font-bold">Thanks — your message is on the way.</h3>
+                  <h3 className="text-[1.2rem] font-bold">Thank you!</h3>
                   <p className="max-w-sm text-[0.95rem] text-ink-soft">
-                    Your email client should have opened. If not, email us directly at{" "}
-                    <a className="font-semibold text-ink underline decoration-accent-1" href={CONTACT.emailHref}>{CONTACT.email}</a>.
+                    Your request has been received. We'll be in touch shortly.
                   </p>
                 </div>
               ) : (
@@ -140,8 +148,8 @@ function Contact() {
                   </div>
                   <Field name="message"  label="What's the goal for the next 90 days?" textarea required />
                   {err && <p className="text-[0.85rem] text-red-600">{err}</p>}
-                  <button type="submit" className="btn btn-primary mt-2 w-full">
-                    Book My Free Strategy Call
+                  <button type="submit" disabled={status === "submitting"} className="btn btn-primary mt-2 w-full disabled:opacity-60 disabled:cursor-not-allowed">
+                    {status === "submitting" ? "Sending…" : "Book My Free Strategy Call"}
                   </button>
                   <p className="text-center text-[0.78rem] text-ink-faint">
                     No contracts. No spam. We reply personally within one business day.
