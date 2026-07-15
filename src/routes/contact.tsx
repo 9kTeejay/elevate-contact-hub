@@ -130,10 +130,9 @@ function Contact() {
               {status === "ok" ? (
                 <div className="flex flex-col items-center gap-4 py-10 text-center">
                   <CheckCircle2 className="h-10 w-10 text-accent-1" />
-                  <h3 className="text-[1.2rem] font-bold">Thanks — your message is on the way.</h3>
+                  <h3 className="text-[1.2rem] font-bold">Thank you!</h3>
                   <p className="max-w-sm text-[0.95rem] text-ink-soft">
-                    Your email client should have opened. If not, email us directly at{" "}
-                    <a className="font-semibold text-ink underline decoration-accent-1" href={CONTACT.emailHref}>{CONTACT.email}</a>.
+                    Your request has been received. We'll be in touch shortly.
                   </p>
                 </div>
               ) : (
