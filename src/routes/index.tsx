@@ -118,6 +118,64 @@ function Home() {
         ))}
       </section>
 
+      {/* ANIMATED STATS BAR */}
+      <section className="py-14 text-white" style={{ background: "var(--navy-deep)" }}>
+        <div className="wrap grid grid-cols-2 gap-8 md:grid-cols-4 text-center">
+          {[
+            { end: 12483, prefix: "", suffix: "+", label: "Policyholders helped" },
+            { end: 412, prefix: "$", suffix: "/yr", label: "Avg. savings identified" },
+            { end: 24, prefix: "", suffix: "/7", label: "Live line coverage" },
+            { end: 4, prefix: "", suffix: ".9★", label: "Client rating" },
+          ].map((s) => (
+            <div key={s.label}>
+              <div className="text-[clamp(1.9rem,3.2vw,2.6rem)] font-extrabold tracking-tight text-white">
+                <CountUp end={s.end} prefix={s.prefix} suffix={s.suffix} />
+              </div>
+              <div className="mt-1.5 text-[0.86rem] text-white/70">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* RATE / POLICY REVIEW — split form */}
+      <section id="review" className="py-24 bg-white">
+        <div className="wrap grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:items-center">
+          <Reveal>
+            <span className="eyebrow-label" style={{ color: "var(--navy-deep)" }}>Free Policy Review</span>
+            <h2 className="section-title mt-3.5" style={{ color: "var(--navy-deep)" }}>
+              You may be paying more than you need to.
+            </h2>
+            <p className="mt-5 text-[1.05rem] text-ink-soft max-w-lg">
+              Rates, health class, and coverage options have changed. A quick, no-obligation review of
+              your current Mutual of Omaha policy shows you exactly what your coverage is worth today —
+              and whether better options exist for your family.
+            </p>
+            <ul className="mt-6 space-y-3 text-[0.98rem] text-ink">
+              {[
+                ["Confirm your policy is still the right fit", TrendingDown],
+                ["Compare against current market rates", Award],
+                ["Get plain-English answers on benefits & riders", ShieldCheck],
+                ["Zero cost. Zero obligation. Zero pressure.", Lock],
+              ].map(([t, Icon]: any) => (
+                <li key={t} className="flex items-start gap-3">
+                  <Icon className="mt-0.5 h-5 w-5 flex-none" style={{ color: "var(--accent-3)" }} />
+                  <span>{t}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-8 hidden lg:flex">
+              <CallBtn />
+            </div>
+          </Reveal>
+
+          <Reveal delay={120}>
+            <PolicyReviewForm />
+          </Reveal>
+        </div>
+      </section>
+
+
+
       {/* HOW IT WORKS */}
       <section id="how" className="py-24 bg-surface">
         <div className="wrap">
