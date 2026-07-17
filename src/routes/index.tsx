@@ -14,12 +14,26 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Mutual of Omaha Life Insurance Policy Help — Call (832) 622-4254" },
-      { name: "description", content: "Independent help line for Mutual of Omaha life insurance policyholders and beneficiaries. Claims, beneficiary changes, denied claims, lapsed policies. Speak to a licensed agent — call (832) 622-4254." },
+      { name: "description", content: "Independent help line for Mutual of Omaha life insurance policyholders and beneficiaries. Claims, beneficiary changes, denied claims, lapsed policies, free policy reviews. Speak to a licensed agent — call (832) 622-4254." },
       { property: "og:title", content: "Mutual of Omaha Life Insurance Policy Help Line" },
-      { property: "og:description", content: "Call (832) 622-4254 for expert life insurance guidance. Independent, licensed help for policyholders and beneficiaries." },
+      { property: "og:description", content: "Call (832) 622-4254 for expert life insurance guidance. Independent, licensed help for policyholders and beneficiaries. Free policy review." },
       { property: "og:url", content: "/" },
     ],
     links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }),
+      },
+    ],
   }),
   component: Home,
 });
