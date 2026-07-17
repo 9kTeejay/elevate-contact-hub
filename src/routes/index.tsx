@@ -78,6 +78,14 @@ function Home() {
                   <Phone className="h-4 w-4" /> CALL {CONTACT.phone}
                 </a>
               </div>
+              <div className="mt-5 flex items-center gap-3 rounded-xl bg-white/10 px-4 py-3 backdrop-blur">
+                <div className="flex text-yellow-300">
+                  {[0,1,2,3,4].map(i => <Star key={i} className="h-4 w-4 fill-current" />)}
+                </div>
+                <div className="text-[0.86rem] text-white/90">
+                  <strong className="text-white">4.9/5</strong> from 2,300+ policyholders
+                </div>
+              </div>
               <div className="mt-6 grid grid-cols-2 gap-y-2 text-[0.86rem] text-white/80">
                 <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5" /> Free consultation</span>
                 <span className="inline-flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" /> Live line 24/7</span>
