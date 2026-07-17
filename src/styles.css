@@ -141,10 +141,10 @@
   transition: transform 0.25s cubic-bezier(.2,.8,.2,1), box-shadow 0.25s, background 0.25s, border-color 0.25s, color 0.25s;
 }
 @utility btn-primary {
-  background: var(--ink);
+  background: var(--navy-deep);
   color: white;
-  box-shadow: var(--shadow-soft);
-  &:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+  box-shadow: var(--shadow-brand);
+  &:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); background: var(--navy); }
 }
 @utility btn-ghost {
   background: transparent;
