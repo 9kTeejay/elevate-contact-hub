@@ -38,6 +38,13 @@ function CallBtn({ full = false }: { full?: boolean }) {
 function Home() {
   return (
     <>
+      {/* URGENCY RIBBON */}
+      <div className="w-full text-center text-[0.86rem] font-semibold py-2.5 px-4"
+           style={{ background: "linear-gradient(90deg, #fff8e1, #fff3d0, #fff8e1)", color: "var(--navy-deep)" }}>
+        <Timer className="inline h-3.5 w-3.5 mr-1.5 -mt-0.5" />
+        Rate reviews are running <strong>free through this month</strong> — average savings identified: $412/yr.
+      </div>
+
       {/* HERO — split image + navy card */}
       <section className="pt-14 pb-20 bg-white">
         <div className="wrap grid gap-8 lg:grid-cols-[1.15fr_1fr] lg:items-stretch">
