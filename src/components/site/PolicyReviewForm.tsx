@@ -86,43 +86,48 @@ export function PolicyReviewForm() {
         Free Policy Review · Step {step} of 4
       </div>
 
-      {step < 4 ? (
-        <>
-          <h3 className="text-[1.3rem] font-bold mb-5" style={{ color: "var(--navy-deep)" }}>
-            {questions[step].label}
-          </h3>
-          <div className="grid gap-2.5">
-            {questions[step].options.map((opt) => {
-              const active = data[questions[step].key] === opt;
-              return (
-                <button
-                  type="button"
-                  key={opt}
-                  onClick={() => {
-                    set(questions[step].key, opt);
-                    setTimeout(() => setStep((s) => (Math.min(4, (s as number) + 1)) as Step), 150);
-                  }}
-                  className={`flex items-center justify-between rounded-xl border px-4 py-3.5 text-left text-[0.95rem] font-medium transition-all ${
-                    active ? "text-white" : "text-ink hover:bg-surface"
-                  }`}
-                  style={{
-                    borderColor: active ? "var(--navy-deep)" : "var(--line)",
-                    background: active ? "var(--navy-deep)" : "white",
-                  }}
-                >
-                  {opt}
-                  <ArrowRight className="h-4 w-4 opacity-60" />
+      {step !== 4 ? (
+        (() => {
+          const q = questions[step];
+          return (
+            <>
+              <h3 className="text-[1.3rem] font-bold mb-5" style={{ color: "var(--navy-deep)" }}>
+                {q.label}
+              </h3>
+              <div className="grid gap-2.5">
+                {q.options.map((opt) => {
+                  const active = data[q.key] === opt;
+                  return (
+                    <button
+                      type="button"
+                      key={opt}
+                      onClick={() => {
+                        set(q.key, opt);
+                        setTimeout(() => setStep((s) => (Math.min(4, (s as number) + 1)) as Step), 150);
+                      }}
+                      className={`flex items-center justify-between rounded-xl border px-4 py-3.5 text-left text-[0.95rem] font-medium transition-all ${
+                        active ? "text-white" : "text-ink hover:bg-surface"
+                      }`}
+                      style={{
+                        borderColor: active ? "var(--navy-deep)" : "var(--line)",
+                        background: active ? "var(--navy-deep)" : "white",
+                      }}
+                    >
+                      {opt}
+                      <ArrowRight className="h-4 w-4 opacity-60" />
+                    </button>
+                  );
+                })}
+              </div>
+              {step > 1 && (
+                <button type="button" onClick={() => setStep((s) => Math.max(1, (s as number) - 1) as Step)}
+                        className="mt-4 text-[0.85rem] text-ink-faint hover:text-ink">
+                  ← Back
                 </button>
-              );
-            })}
-          </div>
-          {step > 1 && (
-            <button type="button" onClick={() => setStep((s) => Math.max(1, (s as number) - 1) as Step)}
-                    className="mt-4 text-[0.85rem] text-ink-faint hover:text-ink">
-              ← Back
-            </button>
-          )}
-        </>
+              )}
+            </>
+          );
+        })()
       ) : (
         <>
           <h3 className="text-[1.3rem] font-bold mb-2" style={{ color: "var(--navy-deep)" }}>
