@@ -249,8 +249,66 @@ function Home() {
         </div>
       </section>
 
+      {/* TESTIMONIALS */}
+      <section className="py-24 bg-surface">
+        <div className="wrap">
+          <Reveal className="max-w-2xl mx-auto text-center">
+            <span className="eyebrow-label" style={{ color: "var(--navy-deep)" }}>Real Callers</span>
+            <h2 className="section-title mt-3.5" style={{ color: "var(--navy-deep)" }}>
+              Thousands of families. One phone call.
+            </h2>
+          </Reveal>
+
+          <div className="mt-14 grid gap-6 md:grid-cols-3">
+            {[
+              { name: "Denise R.", role: "Beneficiary · Houston, TX", initials: "DR",
+                quote: "My mom's claim was stuck for weeks. One phone call and I finally understood exactly what was missing. Check arrived 11 days later." },
+              { name: "Marcus T.", role: "Policyholder · Atlanta, GA", initials: "MT",
+                quote: "They reviewed my old policy and showed me I qualified for way better coverage at a lower monthly rate. Wish I'd called two years ago." },
+              { name: "Linda K.", role: "Beneficiary · Tampa, FL", initials: "LK",
+                quote: "Called the 800 number three times and got nowhere. These folks picked up on the second ring and answered every question in ten minutes." },
+            ].map((t, i) => (
+              <Reveal key={t.name} delay={i * 80}>
+                <div className="flex h-full flex-col gap-5 rounded-2xl border border-line bg-white p-7 shadow-sm">
+                  <div className="flex text-yellow-500">
+                    {[0,1,2,3,4].map(n => <Star key={n} className="h-4 w-4 fill-current" />)}
+                  </div>
+                  <p className="text-[0.98rem] leading-relaxed text-ink">"{t.quote}"</p>
+                  <div className="mt-auto flex items-center gap-3 border-t border-line pt-4">
+                    <div className="grid h-11 w-11 flex-none place-items-center rounded-full font-bold text-white"
+                         style={{ background: "var(--navy-deep)" }}>
+                      {t.initials}
+                    </div>
+                    <div>
+                      <div className="text-[0.92rem] font-bold" style={{ color: "var(--navy-deep)" }}>{t.name}</div>
+                      <div className="text-[0.8rem] text-ink-faint">{t.role}</div>
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* Trust logos strip */}
+          <div className="mt-16 rounded-2xl bg-white border border-line p-6">
+            <div className="mono mb-4 text-center text-[0.72rem] uppercase tracking-[0.12em] text-ink-faint">
+              Independent help for policyholders of leading carriers
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
+              {["Mutual of Omaha", "AIG", "Prudential", "MetLife", "Transamerica", "New York Life"].map((c) => (
+                <span key={c} className="text-[1.05rem] font-bold tracking-tight opacity-60 hover:opacity-100 transition-opacity"
+                      style={{ color: "var(--navy-deep)" }}>
+                  {c}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* LONG-FORM CONTENT */}
       <section className="py-24" style={{ background: "var(--navy-deep)" }}>
+
         <div className="wrap-narrow text-white/90">
           <Reveal>
             <h2 className="section-title text-white">
