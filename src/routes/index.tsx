@@ -1,18 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Phone, ShieldCheck, Clock, CheckCircle2, ArrowRight } from "lucide-react";
+import { Phone, CheckCircle2, ShieldCheck, Clock, Users } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { FAQ } from "@/components/site/FAQ";
-import {
-  helpTopics, whyCallUs, stats, commonIssues, testimonials, faqs, CONTACT, BRAND,
-} from "@/lib/site-content";
+import { helpTopics, faqs, CONTACT, BRAND } from "@/lib/site-content";
+import heroPolicy from "@/assets/hero-policy.jpg";
+import familyBw from "@/assets/family-bw.jpg";
+import flag from "@/assets/flag.jpg";
+import agent from "@/assets/agent.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Mutual of Omaha Life Insurance Help Line — Call (832) 622-4254" },
-      { name: "description", content: "Free, independent help for Mutual of Omaha life insurance policyholders and beneficiaries. Claims, beneficiary questions, denied claims, lapsed policies. Live line 24/7." },
-      { property: "og:title", content: "Mutual of Omaha Life Insurance Help Line" },
-      { property: "og:description", content: "Free, independent help for Mutual of Omaha life insurance policyholders. Live line 24/7 — (832) 622-4254." },
+      { title: "Mutual of Omaha Life Insurance Policy Help — Call (832) 622-4254" },
+      { name: "description", content: "Independent help line for Mutual of Omaha life insurance policyholders and beneficiaries. Claims, beneficiary changes, denied claims, lapsed policies. Speak to a licensed agent — call (832) 622-4254." },
+      { property: "og:title", content: "Mutual of Omaha Life Insurance Policy Help Line" },
+      { property: "og:description", content: "Call (832) 622-4254 for expert life insurance guidance. Independent, licensed help for policyholders and beneficiaries." },
       { property: "og:url", content: "/" },
     ],
     links: [{ rel: "canonical", href: "/" }],
@@ -20,11 +22,13 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-function CallButton({ label = "Call Now", size = "lg" }: { label?: string; size?: "lg" | "md" }) {
-  const cls = size === "lg" ? "btn btn-primary text-[1.05rem] px-7 py-4" : "btn btn-primary";
+function CallBtn({ full = false }: { full?: boolean }) {
   return (
-    <a href={CONTACT.phoneHref} className={`${cls} shadow-lg`}>
-      <Phone className="h-4 w-4" /> {label} · {CONTACT.phone}
+    <a
+      href={CONTACT.phoneHref}
+      className={`btn btn-primary ${full ? "w-full" : ""} text-[1.02rem] px-7 py-4`}
+    >
+      <Phone className="h-4 w-4" /> CALL {CONTACT.phone}
     </a>
   );
 }
@@ -32,234 +36,242 @@ function CallButton({ label = "Call Now", size = "lg" }: { label?: string; size?
 function Home() {
   return (
     <>
-      {/* HERO */}
-      <section className="relative overflow-hidden pt-24 pb-20">
-        <div
-          className="pointer-events-none absolute left-1/2 top-[-260px] h-[620px] w-[1100px] -translate-x-1/2 blur-[10px]"
-          style={{ background: "radial-gradient(closest-side, color-mix(in oklab, var(--accent-1) 22%, transparent), color-mix(in oklab, var(--accent-2) 14%, transparent) 45%, transparent 72%)" }}
-        />
-        <div className="wrap relative">
+      {/* HERO — split image + navy card */}
+      <section className="pt-14 pb-20 bg-white">
+        <div className="wrap grid gap-8 lg:grid-cols-[1.15fr_1fr] lg:items-stretch">
           <Reveal>
-            <span className="eyebrow">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent-1 pulse-dot" />
-              Independent Policyholder Help Line · Not affiliated with Mutual of Omaha
-            </span>
-          </Reveal>
-          <Reveal delay={80}>
-            <h1 className="display-title mt-6 max-w-[960px]">
-              Real help with your <span className="grad-text">Mutual of Omaha life insurance policy</span> — one phone call away.
-            </h1>
-          </Reveal>
-          <Reveal delay={140}>
-            <p className="mt-6 max-w-[680px] text-[clamp(1.05rem,1.6vw,1.25rem)] text-ink-soft">
-              Filing a claim. Chasing a denied payout. Confused about a rate hike or a lapsed policy.
-              Whatever you're dealing with, a licensed professional will answer the phone and walk you
-              through it — free, no pressure, no phone tree.
-            </p>
-          </Reveal>
-
-          <Reveal delay={200}>
-            <div className="mt-9 flex flex-wrap items-center gap-3.5">
-              <CallButton label="Call Now" />
-              <a href="#topics" className="btn btn-ghost">See what we help with <ArrowRight className="h-4 w-4" /></a>
+            <div className="relative overflow-hidden rounded-[22px] shadow-xl h-full min-h-[420px]">
+              <img
+                src={heroPolicy}
+                alt="Senior signing a life insurance policy document"
+                width={1408}
+                height={1104}
+                className="h-full w-full object-cover"
+              />
             </div>
-            <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-[0.86rem] text-ink-faint">
-              <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-accent-1" /> Free consultation</span>
-              <span className="inline-flex items-center gap-1.5"><Clock className="h-3.5 w-3.5 text-accent-1" /> Live line 24/7</span>
-              <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5 text-accent-1" /> Licensed & independent</span>
-            </div>
-          </Reveal>
-
-          {/* Hero call card */}
-          <Reveal delay={280}>
-            <div className="mt-14 max-w-xl rounded-[28px] border border-line bg-white p-6 shadow-xl sm:p-8">
-              <div className="flex items-center gap-4">
-                <span className="grid h-14 w-14 flex-none place-items-center rounded-2xl text-white"
-                      style={{ background: "var(--gradient-brand)" }}>
-                  <Phone className="h-6 w-6" />
-                </span>
-                <div className="flex-1">
-                  <div className="mono text-[0.74rem] uppercase tracking-[0.08em] text-ink-faint">Speak to a licensed agent now</div>
-                  <a href={CONTACT.phoneHref} className="mono block text-[1.6rem] font-bold leading-tight text-ink hover:text-accent-1">
-                    {CONTACT.phone}
-                  </a>
-                </div>
-              </div>
-              <div className="mt-5 grid grid-cols-2 gap-3 text-[0.82rem] text-ink-soft">
-                <div className="flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-accent-1" /> Free call</div>
-                <div className="flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-accent-1" /> No obligation</div>
-                <div className="flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-accent-1" /> Real human answers</div>
-                <div className="flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-accent-1" /> Confidential</div>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* STATS BAR */}
-      <section className="border-y border-line py-12">
-        <div className="wrap grid grid-cols-2 gap-10 md:grid-cols-4">
-          {stats.map(([n, l]) => (
-            <div key={l}>
-              <div className="mono text-[clamp(1.7rem,2.6vw,2.3rem)] font-semibold tracking-tight">
-                <span className="grad-text">{n}</span>
-              </div>
-              <div className="mt-1.5 text-[0.88rem] text-ink-soft">{l}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* HELP TOPICS */}
-      <section id="topics" className="py-24">
-        <div className="wrap">
-          <Reveal className="max-w-[680px]">
-            <span className="eyebrow-label">What We Help With</span>
-            <h2 className="section-title mt-3.5">Common Mutual of Omaha policy issues we solve every day.</h2>
-            <p className="mt-4 text-[1.05rem] text-ink-soft">
-              If you don't see your exact issue, call anyway — chances are we've handled it before.
-            </p>
           </Reveal>
 
           <Reveal delay={100}>
-            <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
-              {helpTopics.map((s) => (
-                <a key={s.title} href={CONTACT.phoneHref} className="group flex flex-col gap-4 bg-white p-7 transition-colors hover:bg-surface">
-                  <div className="grid h-11 w-11 place-items-center rounded-xl text-accent-1"
-                       style={{ background: "linear-gradient(135deg, color-mix(in oklab, var(--accent-1) 14%, transparent), color-mix(in oklab, var(--accent-3) 14%, transparent))" }}>
-                    {s.icon}
+            <div
+              className="relative flex h-full flex-col justify-center rounded-[22px] p-10 sm:p-12 text-white overflow-hidden"
+              style={{ background: "linear-gradient(160deg, var(--navy-deep) 0%, var(--accent-2) 100%)" }}
+            >
+              <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full opacity-20"
+                   style={{ background: "radial-gradient(circle, white, transparent 60%)" }} />
+              <span className="mono text-[0.78rem] uppercase tracking-[0.16em] text-white/70">
+                Life Insurance Simplified
+              </span>
+              <h1 className="mt-4 font-extrabold leading-[1.05] tracking-[-0.02em]"
+                  style={{ fontSize: "clamp(2rem, 3.6vw, 2.9rem)" }}>
+                Call today for expert <span className="text-white/95 underline decoration-white/40 underline-offset-8">Mutual of Omaha</span> policy guidance.
+              </h1>
+              <p className="mt-5 text-[1.02rem] text-white/80 max-w-md">
+                Claims, denied payouts, beneficiary changes, premium confusion or a lapsed policy —
+                talk to a licensed professional now. Free. No pressure. No phone tree.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a href={CONTACT.phoneHref}
+                   className="btn text-[1.05rem] px-7 py-4"
+                   style={{ background: "white", color: "var(--navy-deep)" }}>
+                  <Phone className="h-4 w-4" /> CALL {CONTACT.phone}
+                </a>
+              </div>
+              <div className="mt-6 grid grid-cols-2 gap-y-2 text-[0.86rem] text-white/80">
+                <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5" /> Free consultation</span>
+                <span className="inline-flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" /> Live line 24/7</span>
+                <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5" /> Licensed & independent</span>
+                <span className="inline-flex items-center gap-1.5"><Users className="h-3.5 w-3.5" /> Real human answers</span>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* PATRIOTIC TRUST BAND — 3 tall images */}
+      <section className="grid sm:grid-cols-3 gap-0.5">
+        {[familyBw, flag, agent].map((src, i) => (
+          <div key={i} className="relative aspect-[4/5] overflow-hidden">
+            <img
+              src={src}
+              alt={["American family", "American flag", "Licensed agent on call"][i]}
+              loading="lazy"
+              className="h-full w-full object-cover"
+            />
+          </div>
+        ))}
+      </section>
+
+      {/* HOW IT WORKS */}
+      <section id="how" className="py-24 bg-surface">
+        <div className="wrap">
+          <Reveal className="text-center max-w-2xl mx-auto">
+            <span className="eyebrow-label" style={{ color: "var(--navy-deep)" }}>How It Works</span>
+            <h2 className="section-title mt-3.5" style={{ color: "var(--navy-deep)" }}>
+              Three simple steps to real answers.
+            </h2>
+          </Reveal>
+
+          <div className="mt-14 grid gap-8 md:grid-cols-3">
+            {[
+              { n: "1", title: "Call the Help Line", desc: "Dial our number and speak with a licensed insurance professional on the first ring — no hold music, no phone tree." },
+              { n: "2", title: "Share Your Situation", desc: "Tell us about your Mutual of Omaha policy or the claim you're dealing with. Everything you share is confidential." },
+              { n: "3", title: "Get a Clear Next Step", desc: "You'll leave the call with plain-English answers and a specific action plan — free and with zero obligation." },
+            ].map((s, i) => (
+              <Reveal key={s.n} delay={i * 100}>
+                <div className="relative flex flex-col items-center text-center px-4">
+                  <div
+                    className="grid h-16 w-16 place-items-center rounded-full text-white text-[1.4rem] font-extrabold shadow-lg"
+                    style={{ background: "var(--gradient-brand)" }}
+                  >
+                    {s.n}
                   </div>
-                  <span className="mono text-[0.7rem] uppercase tracking-[0.06em] text-accent-1">{s.tag}</span>
-                  <h3 className="text-[1.02rem] font-bold">{s.title}</h3>
-                  <p className="text-[0.9rem] text-ink-soft">{s.desc}</p>
-                  <span className="mt-auto inline-flex items-center gap-1 text-[0.82rem] font-semibold text-ink group-hover:text-accent-1">
+                  <h3 className="mt-6 text-[1.18rem] font-bold" style={{ color: "var(--navy-deep)" }}>{s.title}</h3>
+                  <p className="mt-3 text-[0.96rem] text-ink-soft max-w-[300px]">{s.desc}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <div className="mt-14 text-center">
+            <CallBtn />
+          </div>
+        </div>
+      </section>
+
+      {/* HOW WE HELP - topic grid */}
+      <section id="topics" className="py-24 bg-white">
+        <div className="wrap">
+          <Reveal className="max-w-2xl">
+            <span className="eyebrow-label" style={{ color: "var(--navy-deep)" }}>What We Help With</span>
+            <h2 className="section-title mt-3.5" style={{ color: "var(--navy-deep)" }}>
+              Common Mutual of Omaha policy issues we handle every day.
+            </h2>
+            <p className="mt-4 text-[1.02rem] text-ink-soft">
+              Don't see your exact situation? Call anyway — chances are we've seen it before.
+            </p>
+          </Reveal>
+
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {helpTopics.map((t, i) => (
+              <Reveal key={t.title} delay={i * 40}>
+                <a href={CONTACT.phoneHref}
+                   className="group flex h-full flex-col gap-3 rounded-2xl border border-line bg-white p-6 transition-all hover:-translate-y-1 hover:shadow-lg"
+                   style={{ borderTop: "3px solid var(--navy-deep)" }}>
+                  <div className="grid h-11 w-11 place-items-center rounded-xl text-white"
+                       style={{ background: "var(--navy-deep)" }}>
+                    {t.icon}
+                  </div>
+                  <h3 className="mt-2 text-[1rem] font-bold" style={{ color: "var(--navy-deep)" }}>{t.title}</h3>
+                  <p className="text-[0.9rem] text-ink-soft">{t.desc}</p>
+                  <span className="mt-auto inline-flex items-center gap-1.5 pt-3 text-[0.84rem] font-semibold group-hover:underline"
+                        style={{ color: "var(--accent-3)" }}>
                     <Phone className="h-3.5 w-3.5" /> Call about this
                   </span>
                 </a>
-              ))}
-            </div>
-          </Reveal>
-
-          <div className="mt-10 text-center">
-            <CallButton />
-          </div>
-        </div>
-      </section>
-
-      {/* WHY CALL US */}
-      <section className="bg-surface py-24">
-        <div className="wrap grid gap-14 md:grid-cols-[0.95fr_1.05fr] md:items-start">
-          <Reveal>
-            <span className="eyebrow-label">Why Call Us</span>
-            <h2 className="section-title mt-3.5">You've been on hold long enough.</h2>
-            <p className="mt-5 text-[1.06rem] text-ink-soft">
-              Big insurance call centers weren't built for you — they were built for volume.
-              We answer the phone like it's a neighbor calling, because that's how policyholder
-              questions should be handled.
-            </p>
-            <div className="mt-7">
-              <CallButton />
-            </div>
-          </Reveal>
-
-          <Reveal delay={120}>
-            <div className="grid gap-6">
-              {whyCallUs.map(({ n, title, desc }) => (
-                <div key={n} className="flex gap-4 border-b border-line pb-6 last:border-b-0 last:pb-0">
-                  <div className="mono pt-0.5 text-[0.9rem] font-semibold text-accent-1">{n}</div>
-                  <div>
-                    <h4 className="text-[1.04rem] font-bold">{title}</h4>
-                    <p className="mt-1.5 text-[0.96rem] text-ink-soft">{desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-
-        <div className="wrap mt-16 border-t border-line pt-11">
-          <div className="mono mb-5 text-[0.78rem] uppercase tracking-[0.08em] text-ink-faint">Common reasons people call</div>
-          <div className="flex flex-wrap gap-2.5">
-            {commonIssues.map((i) => (
-              <span key={i} className="rounded-full border border-line bg-white px-4 py-2 text-[0.86rem] text-ink-soft transition-all hover:-translate-y-px hover:border-accent-1 hover:text-ink">
-                {i}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* TESTIMONIALS */}
-      <section className="py-24">
-        <div className="wrap">
-          <Reveal className="max-w-[660px]">
-            <span className="eyebrow-label">Real Callers</span>
-            <h2 className="section-title mt-3.5">What people say after they hang up.</h2>
-          </Reveal>
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
-            {testimonials.map((t, i) => (
-              <Reveal key={i} delay={i * 80}>
-                <div className="card flex h-full flex-col gap-5 p-8">
-                  <div className="tracking-[2px] text-accent-1">★★★★★</div>
-                  <p className="text-[0.98rem] leading-relaxed text-ink">"{t.quote}"</p>
-                  <div className="mt-auto flex items-center gap-3">
-                    <div className="h-10 w-10 flex-none rounded-full" style={{ background: "var(--gradient-brand)" }} />
-                    <div>
-                      <div className="text-[0.9rem] font-bold">{t.name}</div>
-                      <div className="text-[0.8rem] text-ink-faint">{t.role}</div>
-                    </div>
-                  </div>
-                </div>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section id="faq" className="bg-surface py-24">
-        <div className="wrap-narrow">
+      {/* LONG-FORM CONTENT */}
+      <section className="py-24" style={{ background: "var(--navy-deep)" }}>
+        <div className="wrap-narrow text-white/90">
           <Reveal>
-            <span className="eyebrow-label">FAQ</span>
-            <h2 className="section-title mt-3.5">Straight answers before you call.</h2>
+            <h2 className="section-title text-white">
+              Policy Questions? Here's How Our Help Line Can Assist.
+            </h2>
+            <p className="mt-6 text-[1.05rem] leading-[1.75] text-white/80">
+              When it comes to protecting your family, your life insurance policy is one of the most
+              important documents you own. Whether you're an experienced Mutual of Omaha policyholder
+              or a beneficiary trying to file a claim after a loss, having dependable support on the
+              other end of the phone matters. That's exactly what our dedicated policy help line is for.
+            </p>
+            <div className="my-10 text-center">
+              <a href={CONTACT.phoneHref} className="btn text-[1.05rem] px-7 py-4"
+                 style={{ background: "white", color: "var(--navy-deep)" }}>
+                <Phone className="h-4 w-4" /> CALL {CONTACT.phone} TODAY
+              </a>
+            </div>
+
+            <h3 className="mt-12 text-[1.4rem] font-bold text-white">Your Trusted Partner for Policy Clarity</h3>
+            <p className="mt-3 text-[1rem] leading-[1.75] text-white/80">
+              Our help line is more than a customer-service number — it's a complete support system
+              built to help you understand every part of your Mutual of Omaha life insurance policy.
+              Life insurance is full of dense language and fine print. We translate it into words that
+              actually make sense.
+            </p>
+
+            <h4 className="mt-8 text-[1.15rem] font-bold text-white">How Can We Help You?</h4>
+            <p className="mt-3 text-[1rem] leading-[1.75] text-white/80">
+              Every caller is different. Some need help filing a death benefit claim. Others are trying
+              to reinstate a lapsed policy, update a beneficiary, or make sense of a premium increase.
+              Whatever you're facing, our licensed professionals are ready to guide you through it —
+              step by step, in plain English.
+            </p>
+
+            <h4 className="mt-8 text-[1.15rem] font-bold text-white">Talk to a Real Person — Not a Phone Tree</h4>
+            <p className="mt-3 text-[1rem] leading-[1.75] text-white/80">
+              One of the biggest advantages of calling us is that a licensed representative answers the
+              phone. No 45-minute hold. No being transferred five times. Whether you need help with
+              beneficiaries, premiums, coverage limits, or the claim process, we're ready to give you
+              real answers when you call{" "}
+              <a href={CONTACT.phoneHref} className="underline decoration-white/50 hover:decoration-white">
+                {CONTACT.phone}
+              </a>.
+            </p>
+
+            <h4 className="mt-8 text-[1.15rem] font-bold text-white">Continuous Support for Policyholders & Beneficiaries</h4>
+            <ul className="mt-4 space-y-3 text-[1rem] leading-[1.7] text-white/80">
+              <li><strong className="text-white">Policy Reviews:</strong> Marriage, a new baby, or buying a home can change what your family needs. We'll re-evaluate your coverage with you.</li>
+              <li><strong className="text-white">Premium Adjustments:</strong> Struggling with a rate hike or missed payments? There may be options you don't know about.</li>
+              <li><strong className="text-white">Claims Assistance:</strong> Filing a claim after a loss is hard enough — we guide beneficiaries through it so you get what you're owed, without delays.</li>
+            </ul>
+
+            <p className="mt-10 text-[1rem] leading-[1.75] text-white/70 italic">
+              {BRAND.disclaimer}
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="py-24 bg-white">
+        <div className="wrap-narrow">
+          <Reveal className="text-center">
+            <span className="eyebrow-label" style={{ color: "var(--navy-deep)" }}>Frequently Asked Questions</span>
+            <h2 className="section-title mt-3.5" style={{ color: "var(--navy-deep)" }}>
+              Straight answers before you call.
+            </h2>
           </Reveal>
           <div className="mt-10">
             <FAQ items={faqs} />
-          </div>
-          <div className="mt-10 rounded-2xl border border-line bg-white p-6 text-center">
-            <p className="text-[0.95rem] text-ink-soft">
-              Rather just talk to a human? Call <a href={CONTACT.phoneHref} className="font-semibold text-ink underline decoration-accent-1 underline-offset-4">{CONTACT.phone}</a> — a live agent will pick up.
-            </p>
           </div>
         </div>
       </section>
 
       {/* FINAL CTA */}
-      <section className="py-24">
+      <section className="py-20" style={{ background: "var(--surface)" }}>
         <div className="wrap">
           <Reveal>
-            <div className="relative overflow-hidden rounded-[28px] px-8 py-16 text-center text-white sm:px-12"
-                 style={{ background: "radial-gradient(120% 140% at 20% 0%, #17172a 0%, #0b0b0d 55%), #0b0b0d" }}>
-              <div className="pointer-events-none absolute inset-0" style={{
-                background: "radial-gradient(420px 220px at 80% 110%, color-mix(in oklab, var(--accent-2) 35%, transparent), transparent 70%), radial-gradient(420px 220px at 10% -10%, color-mix(in oklab, var(--accent-3) 25%, transparent), transparent 70%)"
-              }} />
-              <div className="relative">
-                <span className="mono text-[0.78rem] uppercase tracking-[0.14em] text-white/60">Free · Confidential · 24/7</span>
-                <h2 className="section-title mx-auto mt-4 max-w-3xl text-white" style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}>
-                  Stop waiting on hold. Get a straight answer.
-                </h2>
-                <p className="mx-auto mt-4 max-w-xl text-[1.06rem] text-white/70">
-                  One call. A licensed professional will answer, listen, and tell you exactly what to do next with your Mutual of Omaha policy.
-                </p>
-                <div className="mt-8 flex flex-wrap justify-center gap-3.5">
-                  <a href={CONTACT.phoneHref} className="btn btn-invert text-[1.05rem] px-7 py-4">
-                    <Phone className="h-4 w-4" /> Call {CONTACT.phone}
-                  </a>
-                </div>
-                <p className="mt-6 text-[0.82rem] text-white/50 max-w-2xl mx-auto">
-                  {BRAND.disclaimer}
-                </p>
+            <div className="rounded-[24px] p-10 sm:p-14 text-center text-white shadow-xl"
+                 style={{ background: "linear-gradient(135deg, var(--navy-deep), var(--accent-3))" }}>
+              <h2 className="text-white font-extrabold" style={{ fontSize: "clamp(1.8rem,3.5vw,2.5rem)", lineHeight: 1.15 }}>
+                Stop waiting on hold. Get a straight answer today.
+              </h2>
+              <p className="mx-auto mt-4 max-w-xl text-white/85 text-[1.02rem]">
+                One phone call. A licensed professional will listen and tell you exactly what to do next
+                with your Mutual of Omaha life insurance policy.
+              </p>
+              <div className="mt-8 flex justify-center">
+                <a href={CONTACT.phoneHref} className="btn text-[1.1rem] px-8 py-4 font-bold"
+                   style={{ background: "white", color: "var(--navy-deep)" }}>
+                  <Phone className="h-4 w-4" /> CALL {CONTACT.phone}
+                </a>
               </div>
+              <p className="mt-6 text-[0.82rem] text-white/60">
+                Free · Confidential · Live line 24/7
+              </p>
             </div>
           </Reveal>
         </div>
