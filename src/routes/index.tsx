@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Phone, CheckCircle2, ShieldCheck, Clock, Users } from "lucide-react";
+import { Phone, CheckCircle2, ShieldCheck, Clock, Users, TrendingDown, Star, Award, Lock, Timer } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { FAQ } from "@/components/site/FAQ";
+import { CountUp } from "@/components/site/CountUp";
+import { PolicyReviewForm } from "@/components/site/PolicyReviewForm";
 import { helpTopics, faqs, CONTACT, BRAND } from "@/lib/site-content";
 import heroPolicy from "@/assets/hero-policy.jpg";
 import familyBw from "@/assets/family-bw.jpg";
