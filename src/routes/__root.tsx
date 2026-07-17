@@ -135,6 +135,8 @@ function RootComponent() {
           <Outlet />
         </main>
         <Footer />
+        <StickyCallBar />
+        <LiveActivity />
       </div>
     </QueryClientProvider>
   );
