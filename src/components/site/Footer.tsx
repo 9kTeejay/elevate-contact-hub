@@ -4,7 +4,7 @@ import { CONTACT, BRAND } from "@/lib/site-content";
 
 export function Footer() {
   return (
-    <footer className="border-t border-line bg-white pt-14 pb-8">
+    <footer className="border-t border-line bg-white pt-14 pb-24 md:pb-8">
       <div className="wrap">
         <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr] mb-10">
           <div>

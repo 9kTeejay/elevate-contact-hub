@@ -13,6 +13,8 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { StickyCallBar } from "@/components/site/StickyCallBar";
+import { LiveActivity } from "@/components/site/LiveActivity";
 
 function NotFoundComponent() {
   return (
@@ -133,6 +135,8 @@ function RootComponent() {
           <Outlet />
         </main>
         <Footer />
+        <StickyCallBar />
+        <LiveActivity />
       </div>
     </QueryClientProvider>
   );
